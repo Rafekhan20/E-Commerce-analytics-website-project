@@ -1,0 +1,387 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>E-Commerce Analytics Hub</title>
+    <!-- Google Fonts: Inter -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+    <!-- Lucide Icons -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <!-- Chart.js -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body class="dark-theme">
+    <div class="app-container">
+        <!-- Sidebar Navigation -->
+        <aside class="sidebar">
+            <div class="logo-area">
+                <i data-lucide="shopping-bag" class="logo-icon"></i>
+                <h2>ShopAnalytics</h2>
+            </div>
+            <nav class="nav-links">
+                <a href="#" class="nav-item active" data-tab="overview">
+                    <i data-lucide="layout-dashboard"></i>
+                    <span>Overview</span>
+                </a>
+                <a href="#" class="nav-item" data-tab="revenue">
+                    <i data-lucide="trending-up"></i>
+                    <span>Revenue Analysis</span>
+                </a>
+                <a href="#" class="nav-item" data-tab="products">
+                    <i data-lucide="package"></i>
+                    <span>Product Performance</span>
+                </a>
+                <a href="#" class="nav-item" data-tab="behavior">
+                    <i data-lucide="users"></i>
+                    <span>Customer Behavior</span>
+                </a>
+                <a href="#" class="nav-item" data-tab="sql-playground">
+                    <i data-lucide="terminal"></i>
+                    <span>SQL Playground</span>
+                </a>
+                <a href="#" class="nav-item" data-tab="power-bi">
+                    <i data-lucide="bar-chart-3"></i>
+                    <span>Power BI Guide</span>
+                </a>
+            </nav>
+            <div class="sidebar-footer">
+                <p>Database: SQLite</p>
+                <div class="db-status">
+                    <span class="status-indicator online"></span>
+                    <span>Connected</span>
+                </div>
+            </div>
+        </aside>
+
+        <!-- Main Content Area -->
+        <main class="main-content">
+            <!-- Header -->
+            <header class="top-header">
+                <div class="header-left">
+                    <h1 id="page-title">Analytics Dashboard</h1>
+                    <p class="subtitle" id="page-subtitle">Real-time business performance overview</p>
+                </div>
+                <div class="header-right">
+                    <div class="time-range-badge">
+                        <i data-lucide="calendar"></i>
+                        <span>Last 12 Months</span>
+                    </div>
+                </div>
+            </header>
+
+            <!-- Dashboard Content Container -->
+            <div class="content-body">
+                
+                <!-- 1. OVERVIEW TAB -->
+                <div id="overview-tab" class="tab-pane active">
+                    <!-- KPI Cards Row -->
+                    <div class="kpi-grid">
+                        <div class="kpi-card">
+                            <div class="kpi-header">
+                                <span class="kpi-label">Total Revenue</span>
+                                <i data-lucide="dollar-sign" class="kpi-icon color-revenue"></i>
+                            </div>
+                            <h2 class="kpi-val" id="kpi-revenue">$0.00</h2>
+                            <div class="kpi-trend trend-up">
+                                <i data-lucide="arrow-up-right"></i>
+                                <span>12.4% vs last period</span>
+                            </div>
+                        </div>
+
+                        <div class="kpi-card">
+                            <div class="kpi-header">
+                                <span class="kpi-label">Total Orders</span>
+                                <i data-lucide="shopping-cart" class="kpi-icon color-orders"></i>
+                            </div>
+                            <h2 class="kpi-val" id="kpi-orders">0</h2>
+                            <div class="kpi-trend trend-up">
+                                <i data-lucide="arrow-up-right"></i>
+                                <span>8.2% vs last period</span>
+                            </div>
+                        </div>
+
+                        <div class="kpi-card">
+                            <div class="kpi-header">
+                                <span class="kpi-label">Conversion Rate</span>
+                                <i data-lucide="percent" class="kpi-icon color-conv"></i>
+                            </div>
+                            <h2 class="kpi-val" id="kpi-conversion">0.00%</h2>
+                            <div class="kpi-trend trend-up">
+                                <i data-lucide="arrow-up-right"></i>
+                                <span>4.1% vs last period</span>
+                            </div>
+                        </div>
+
+                        <div class="kpi-card">
+                            <div class="kpi-header">
+                                <span class="kpi-label">Average Order Value (AOV)</span>
+                                <i data-lucide="credit-card" class="kpi-icon color-aov"></i>
+                            </div>
+                            <h2 class="kpi-val" id="kpi-aov">$0.00</h2>
+                            <div class="kpi-trend trend-down">
+                                <i data-lucide="arrow-down-right"></i>
+                                <span>-1.2% vs last period</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Charts Grid -->
+                    <div class="charts-grid-2">
+                        <div class="chart-card">
+                            <h3>Revenue & Margin Trend</h3>
+                            <div class="chart-container">
+                                <canvas id="revenueTrendChart"></canvas>
+                            </div>
+                        </div>
+                        <div class="chart-card">
+                            <h3>Sales by Category Share</h3>
+                            <div class="chart-container">
+                                <canvas id="categoryShareChart"></canvas>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 2. REVENUE ANALYSIS TAB -->
+                <div id="revenue-tab" class="tab-pane">
+                    <div class="charts-grid-2">
+                        <div class="chart-card">
+                            <h3>Monthly Sales Performance & Profit Margins</h3>
+                            <div class="chart-container">
+                                <canvas id="revenueMarginDetailChart"></canvas>
+                            </div>
+                        </div>
+                        <div class="chart-card">
+                            <h3>Revenue Contribution by Acquisition Channel</h3>
+                            <div class="chart-container">
+                                <canvas id="channelRevenueChart"></canvas>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="chart-card margin-top-20">
+                        <h3>Acquisition Channel Summary</h3>
+                        <div class="table-container">
+                            <table class="data-table" id="channels-table">
+                                <thead>
+                                    <tr>
+                                        <th>Acquisition Channel</th>
+                                        <th>Users Acquired</th>
+                                        <th>Orders Placed</th>
+                                        <th>Total Revenue</th>
+                                        <th>AOV</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <!-- Populated dynamically -->
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 3. PRODUCT PERFORMANCE TAB -->
+                <div id="products-tab" class="tab-pane">
+                    <div class="charts-grid-2">
+                        <div class="chart-card">
+                            <h3>Top 10 Selling Products by Revenue</h3>
+                            <div class="chart-container">
+                                <canvas id="topProductsChart"></canvas>
+                            </div>
+                        </div>
+                        <div class="chart-card">
+                            <h3>Category Operations Performance</h3>
+                            <div class="table-container">
+                                <table class="data-table" id="category-summary-table">
+                                    <thead>
+                                        <tr>
+                                            <th>Category</th>
+                                            <th>Orders Count</th>
+                                            <th>Units Sold</th>
+                                            <th>Total Revenue</th>
+                                            <th>Gross Profit</th>
+                                            <th>Margin (%)</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <!-- Populated dynamically -->
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="chart-card margin-top-20">
+                        <h3>Top 10 Product Table</h3>
+                        <div class="table-container">
+                            <table class="data-table" id="top-products-table">
+                                <thead>
+                                    <tr>
+                                        <th>Product Name</th>
+                                        <th>Category</th>
+                                        <th>Units Sold</th>
+                                        <th>Total Revenue</th>
+                                        <th>Gross Profit</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <!-- Populated dynamically -->
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 4. CUSTOMER BEHAVIOR TAB -->
+                <div id="behavior-tab" class="tab-pane">
+                    <div class="charts-grid-2">
+                        <!-- Clickstream Funnel -->
+                        <div class="chart-card">
+                            <h3>E-Commerce Conversion Funnel</h3>
+                            <div class="funnel-container" id="funnel-visual">
+                                <!-- Generated Dynamically via JS -->
+                            </div>
+                        </div>
+                        <!-- Cohort Retention Heatmap -->
+                        <div class="chart-card">
+                            <h3>Customer Cohort Retention Rate (%)</h3>
+                            <div class="table-container">
+                                <table class="data-table cohort-table" id="cohort-table">
+                                    <thead>
+                                        <tr>
+                                            <th>Signup Cohort</th>
+                                            <th>Cohort Size</th>
+                                            <th>Month 0</th>
+                                            <th>Month 1</th>
+                                            <th>Month 2</th>
+                                            <th>Month 3</th>
+                                            <th>Month 4</th>
+                                            <th>Month 5</th>
+                                            <th>Month 6</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <!-- Populated dynamically -->
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 5. SQL PLAYGROUND TAB -->
+                <div id="sql-playground-tab" class="tab-pane">
+                    <div class="sql-playground-container">
+                        <div class="sql-editor-panel">
+                            <div class="editor-header">
+                                <span class="editor-title"><i data-lucide="code-2"></i> SQL Query Editor (SQLite Mode)</span>
+                                <div class="query-selector">
+                                    <label for="sample-queries">Presets:</label>
+                                    <select id="sample-queries">
+                                        <option value="q1">Show Users limit 5</option>
+                                        <option value="q2">Revenue by Product Category</option>
+                                        <option value="q3">Conversion Funnel Analytics</option>
+                                        <option value="q4">Top 5 Loyal Customers (RFM)</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="editor-body">
+                                <textarea id="sql-input" placeholder="SELECT * FROM products LIMIT 10;"></textarea>
+                            </div>
+                            <div class="editor-footer">
+                                <div class="safety-badge">
+                                    <i data-lucide="shield-check"></i>
+                                    <span>Read-Only Sandbox (No modifications allowed)</span>
+                                </div>
+                                <button id="btn-run-sql" class="btn btn-primary">
+                                    <i data-lucide="play"></i> Run Query
+                                </button>
+                            </div>
+                        </div>
+
+                        <!-- Query Output Panel -->
+                        <div class="sql-output-panel">
+                            <div class="output-header">
+                                <span class="output-title"><i data-lucide="database"></i> Query Results</span>
+                                <span class="output-meta" id="sql-meta">Run a query to see results</span>
+                            </div>
+                            <div class="output-body" id="sql-output-container">
+                                <div class="empty-state">
+                                    <i data-lucide="terminal"></i>
+                                    <p>Write an SQL query and click "Run Query" to fetch results.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 6. POWER BI GUIDE TAB -->
+                <div id="power-bi-tab" class="tab-pane">
+                    <div class="pbi-guide-container">
+                        <div class="guide-intro">
+                            <h2>Connecting Power BI to your E-Commerce Data</h2>
+                            <p>Bring the sqlite database data directly into Power BI Desktop for advanced modeling, interactive filtering, and scheduled reports. Follow these steps to build your workspace.</p>
+                        </div>
+
+                        <div class="guide-steps-grid">
+                            <div class="guide-card">
+                                <div class="step-num">1</div>
+                                <h3>Export Database to CSV</h3>
+                                <p>We've created a Python script that exports the SQLite tables into optimized, clean CSV files for easy loading in Power BI.</p>
+                                <div class="script-box">
+                                    <code>python power_bi/export_csv.py</code>
+                                </div>
+                            </div>
+                            
+                            <div class="guide-card">
+                                <div class="step-num">2</div>
+                                <h3>Load Data & Setup Relationships</h3>
+                                <p>Import the CSVs into Power BI Desktop and create a <strong>Star Schema</strong> layout:</p>
+                                <ul>
+                                    <li><code>Orders[user_id]</code> &rarr; <code>Users[user_id]</code></li>
+                                    <li><code>OrderItems[order_id]</code> &rarr; <code>Orders[order_id]</code></li>
+                                    <li><code>OrderItems[product_id]</code> &rarr; <code>Products[product_id]</code></li>
+                                    <li><code>WebEvents[user_id]</code> &rarr; <code>Users[user_id]</code></li>
+                                </ul>
+                            </div>
+
+                            <div class="guide-card">
+                                <div class="step-num">3</div>
+                                <h3>Create DAX Measures</h3>
+                                <p>Use these DAX queries to compute advanced analytics inside Power BI:</p>
+                                <div class="dax-code-block">
+                                    <strong>Average Order Value (AOV):</strong>
+                                    <code>AOV = DIVIDE(SUM(Orders[total_amount]), DISTINCTCOUNT(Orders[order_id]))</code>
+                                </div>
+                                <div class="dax-code-block">
+                                    <strong>Year-to-Date Revenue:</strong>
+                                    <code>YTD Revenue = TOTALYTD(SUM(OrderItems[quantity] * OrderItems[unit_price]), 'Calendar'[Date])</code>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="guide-download-card">
+                            <div class="download-left">
+                                <i data-lucide="file-csv" class="download-icon"></i>
+                                <div>
+                                    <h3>Generate Power BI Dataset Files</h3>
+                                    <p>Run the exporter now to write the data tables to CSV inside your workspace directory.</p>
+                                </div>
+                            </div>
+                            <button id="btn-export-csv" class="btn btn-secondary">
+                                <i data-lucide="download"></i> Export CSV Dataset
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </main>
+    </div>
+    
+    <script src="dashboard.js"></script>
+</body>
+</html>

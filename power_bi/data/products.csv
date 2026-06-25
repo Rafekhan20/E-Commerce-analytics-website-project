@@ -1,0 +1,49 @@
+product_id,product_name,category,price,cost,stock_quantity
+1,Smart 4K TV,Electronics,499.99,274.99,173
+2,Wireless Headphones,Electronics,89.99,36.0,38
+3,Bluetooth Speaker,Electronics,45.99,20.7,16
+4,Smartphone 128GB,Electronics,799.99,479.99,199
+5,"Laptop Pro 15""",Electronics,1299.99,844.99,80
+6,Smartwatch Series X,Electronics,199.99,100.0,72
+7,Noise Cancelling Earbuds,Electronics,149.99,63.0,67
+8,Tablet HD 10,Electronics,229.99,119.59,45
+9,Classic Denim Jacket,Fashion,59.99,21.0,198
+10,Leather Sneakers,Fashion,79.99,30.4,36
+11,Cotton T-Shirt (3-Pack),Fashion,24.99,7.0,183
+12,Running Shoes,Fashion,99.99,40.0,199
+13,Slim Fit Chinos,Fashion,39.99,12.8,149
+14,Winter Wool Coat,Fashion,149.99,67.5,32
+15,Designer Sunglasses,Fashion,119.99,42.0,161
+16,Canvas Backpack,Fashion,34.99,10.5,118
+17,Air Fryer Max,Home & Kitchen,119.99,57.6,18
+18,Espresso Coffee Machine,Home & Kitchen,299.99,164.99,17
+19,Non-Stick Cookware Set,Home & Kitchen,89.99,36.0,33
+20,Robotic Vacuum Cleaner,Home & Kitchen,249.99,125.0,65
+21,Memory Foam Pillow,Home & Kitchen,29.99,9.0,69
+22,Stainless Steel Kettle,Home & Kitchen,39.99,14.0,139
+23,Blender Professional,Home & Kitchen,79.99,36.0,164
+24,Chef Knife 8-Inch,Home & Kitchen,49.99,19.0,16
+25,Sci-Fi Bestseller,Books,14.99,3.75,153
+26,Self-Improvement Guide,Books,18.99,3.8,60
+27,Mystery Thriller Novel,Books,12.99,2.86,193
+28,Python Programming 101,Books,39.99,12.0,176
+29,Business Strategy Handbook,Books,24.99,7.0,189
+30,Historical Fiction Epic,Books,15.99,3.84,149
+31,Children's Story Collection,Books,9.99,1.8,117
+32,Cooking Masterclass Book,Books,29.99,9.0,66
+33,Hydrating Serum,Beauty & Personal Care,28.0,5.6,124
+34,Electric Toothbrush,Beauty & Personal Care,69.99,31.5,160
+35,Hair Dryer 2000W,Beauty & Personal Care,49.99,20.0,81
+36,Matte Lipstick Duo,Beauty & Personal Care,19.99,3.0,11
+37,Moisturizing Cream,Beauty & Personal Care,22.5,4.05,50
+38,Organic Beard Oil,Beauty & Personal Care,15.0,1.8,188
+39,Perfume 'Midnight Gold',Beauty & Personal Care,85.0,29.75,118
+40,Exfoliating Scrub,Beauty & Personal Care,14.5,2.17,97
+41,Yoga Mat Extra Thick,Sports & Outdoors,29.99,9.0,81
+42,Dumbbell Set 20lbs,Sports & Outdoors,49.99,22.5,49
+43,Hydration Backpack,Sports & Outdoors,39.99,14.0,65
+44,Camping Tent (4-Person),Sports & Outdoors,129.99,65.0,96
+45,Resistance Bands Set,Sports & Outdoors,19.99,5.0,36
+46,Cycling Helmet,Sports & Outdoors,44.99,17.1,33
+47,Sleeping Bag Lightweight,Sports & Outdoors,34.99,11.2,107
+48,Adjustable Jump Rope,Sports & Outdoors,9.99,2.0,34
